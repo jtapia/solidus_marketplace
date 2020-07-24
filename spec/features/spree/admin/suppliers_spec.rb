@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Admin - Suppliers', type: :feature, js: true do
+require 'spec_helper'
+
+describe 'Admin - Suppliers', type: :feature, js: true do
   let(:country) { create(:country, name: 'United States') }
   let(:state) { create(:state, name: "Vermont", country: country) }
   let!(:supplier) { create(:supplier) }

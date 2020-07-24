@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe Spree::Supplier do
+require 'spec_helper'
+
+describe Spree::Supplier do
   it { is_expected.to respond_to(:address) }
   it { is_expected.to respond_to(:products) }
   it { is_expected.to respond_to(:stock_locations) }

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe Spree::Order do
+require 'spec_helper'
+
+describe Spree::Order do
   let!(:order) do
     order = create(:order_with_totals)
     order.line_items = [create(:line_item,

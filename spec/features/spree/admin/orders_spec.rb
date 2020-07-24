@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Admin - Orders', type: :feature do
+require 'spec_helper'
+
+describe 'Admin - Orders', type: :feature do
   let!(:user) { create(:supplier_user) }
 
   it 'Supplier should not be authorized' do

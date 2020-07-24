@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   class Supplier < Spree::Base
     extend FriendlyId

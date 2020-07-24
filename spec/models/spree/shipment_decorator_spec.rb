@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
-RSpec.describe Spree::Shipment do
+require 'spec_helper'
+
+describe Spree::Shipment do
   context 'Scopes' do
+    let(:admin) { create(:admin) }
     let(:supplier) { create(:supplier) }
     let(:stock_location_1) { supplier.stock_locations.first }
     let(:stock_location_2) { create(:stock_location, supplier: supplier) }

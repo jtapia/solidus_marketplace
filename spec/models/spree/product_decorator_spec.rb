@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe Spree::Product do
-  let(:product) { create :product }
+require 'spec_helper'
+
+describe Spree::Product do
+  let!(:product) { create(:product) }
   let(:supplier1) { create(:supplier) }
   let(:supplier2) { create(:supplier) }
 

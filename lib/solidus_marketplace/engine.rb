@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+require 'spree/core'
+
 module SolidusMarketplace
   class Engine < Rails::Engine
-    isolate_namespace Spree
-    engine_name 'solidus_marketplace'
+    include SolidusSupport::EngineExtensions
 
-    config.autoload_paths += %W(#{config.root}/lib)
+    isolate_namespace ::Spree
+    engine_name 'solidus_marketplace'
 
     # use rspec for tests
     config.generators do |g|
@@ -19,6 +21,7 @@ module SolidusMarketplace
     initializer 'solidus_marketplace.preferences', before: :load_config_initializers  do |app|
       SolidusMarketplace::Config = SolidusMarketplace::Configuration.new
       Spree::PermittedAttributes.singleton_class.prepend(SolidusMarketplace::PermittedAttributes)
+      Spree::Config.roles.assign_permissions :supplier_admin, ['Spree::PermissionSets::SupplierAbility']
     end
 
     initializer 'solidus_marketplace.menu', before: :load_config_initializers  do |app|
@@ -42,15 +45,5 @@ module SolidusMarketplace
         )
       end
     end
-
-    def self.activate
-      Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
-        Rails.configuration.cache_classes ? require(c) : load(c)
-      end
-
-      Spree::Config.roles.assign_permissions :supplier_admin, ['Spree::PermissionSets::SupplierAbility']
-    end
-
-    config.to_prepare(&method(:activate).to_proc)
   end
 end
